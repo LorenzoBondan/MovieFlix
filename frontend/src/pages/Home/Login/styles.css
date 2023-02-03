@@ -132,10 +132,11 @@ input[type=text], input[type=password]{
     }
 
     .content-container-image { 
-        width: 100%
+        width: 100%;
     }
 
 }
+
   
 
   

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import {ReactComponent as ImgHome} from 'assets/images/home-image.svg';
 
 import './styles.css';
 
@@ -38,7 +39,14 @@ const Login = () => {
     </div>
 
     <div className='content-container'>
-        <h1>imagem e conteúdo</h1>
+        <div className='content-container-text'>
+            <h1>Avalie Filmes</h1>
+            <p>Diga o que você achou do seu filme favorito</p>
+        </div>
+
+        <div className='content-container-image'>
+            <ImgHome />
+        </div>
     </div>
 
     </div>

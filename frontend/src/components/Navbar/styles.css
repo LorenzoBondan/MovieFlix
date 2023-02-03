@@ -1,6 +1,5 @@
 .main-nav {
     min-height: 68px;
-    padding-left: 18px;
 }
 
 .nav-logo-text, .nav-logo-text:hover{
@@ -14,10 +13,23 @@
     letter-spacing: -0.015em;
     text-decoration: none;
     margin-bottom: 0;
+    margin-left: 10px;
+}
+
+@media(min-width:576px){
+    .nav-logo-text h4 {
+        margin-left: 23px;
+    }
+}
+
+@media(min-width:768px){
+    .nav-logo-text h4 {
+        margin-left: 31px;
+    }
 }
 
 @media(min-width:1200px){
-    .main-nav {
-        padding-left: 50px;
+    .nav-logo-text h4 {
+        margin-left: 50px;
     }
 }

@@ -4,7 +4,7 @@ import history from './history';
 import { getAuthData } from './storage';
 
 
-export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://localhost:8080';
+export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'https://movieflix-devsuperior.herokuapp.com';
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'myclientid';
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'myclientsecret';
@@ -29,7 +29,7 @@ export const requestBackendLogin = (loginData : LoginData) => {
         grant_type : 'password'
     });
 
-    return axios({method: 'POST', baseURL: BASE_URL, url: '/oauth/token', data: data, headers: headers})
+    return axios({method: 'POST', baseURL: BASE_URL, url: '/oauth/token', data: data, headers: headers});
 }
 
 export const requestBackend = (config : AxiosRequestConfig) => {

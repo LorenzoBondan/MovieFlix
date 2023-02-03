@@ -1,13 +1,14 @@
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, Router } from 'react-router-dom';
 import Navbar from 'components/Navbar';
 import Home from 'pages/Home';
 import Catalog from 'pages/Catalog';
 import MovieDetails from 'pages/MovieDetails';
+import history from 'util/history';
 
 // era BrowserRouter antes de inserir o parâmetro history
 
 const Routes = () => (
-  <BrowserRouter> 
+  <Router history={history}>
     <Navbar />
     <Switch>
       
@@ -24,7 +25,7 @@ const Routes = () => (
       </Route>
 
     </Switch>
-  </BrowserRouter>
+  </Router>
 );
 
 export default Routes;

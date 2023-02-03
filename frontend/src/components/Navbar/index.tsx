@@ -38,15 +38,17 @@ function Navbar () {
       }
 
     return(
-        <nav className="navbar navbar-expand-md navbar-dark bg-primary main-nav">
+        <nav className="navbar bg-primary main-nav">
             <div className="container-fluid">
                 <Link to="/" className="nav-logo-text">
                     <h4>MovieFlix</h4>
                 </Link>
 
                 <div className='nav-login-logout'>
-                { authContextData.authenticated && (
+                { authContextData.authenticated ? (
                     <button className='btn btn-primary' onClick={handleLogoutClick}>SAIR</button>
+                ) : (
+                    <h1>login</h1>
                 )}
                 </div>
             </div>

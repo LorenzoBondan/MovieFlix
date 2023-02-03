@@ -1,4 +1,4 @@
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import {ReactComponent as ImgHome} from 'assets/images/home-image.svg';
 
 import './styles.css';

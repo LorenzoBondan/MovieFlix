@@ -1,0 +1,69 @@
+.home-container {
+    padding: 10px;
+}
+
+.login-card {
+    padding: 20px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.login-card h1{
+    font-weight: 400;
+    font-size: 2.5em;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: white;
+
+    margin-top: 60px;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+input[type=text], input[type=password]{
+
+    background: #FEFEFE;
+
+    width: 100%;
+    height: 47px;
+
+    border: 1px solid #FEFEFE;
+    border-radius: 4px;
+
+    padding: 14px;
+
+    font-size: 16px;
+    color: #9E9E9E;
+}
+
+.login-card button {
+    width: 100%;
+    height: 50px;
+    margin-top: 54px;
+}
+
+.login-card button h6{
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 0;
+    letter-spacing: -0.015em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.content-container {
+    display: none;
+}
+
+@media(min-width:1200px){
+    
+
+    .content-container {
+        display: unset;
+    }
+}
+  
+
+  

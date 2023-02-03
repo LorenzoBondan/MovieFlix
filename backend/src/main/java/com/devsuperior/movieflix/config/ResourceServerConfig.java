@@ -3,22 +3,13 @@ package com.devsuperior.movieflix.config;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 
 // ############ RESOURCE SERVER
@@ -27,65 +18,37 @@ import org.springframework.web.filter.CorsFilter;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    @Value("${cors.origins}")
-    private String corsOrigins;
+	@Autowired
+	private Environment env; // VARIÁVEL DO AMBIENTE, UTILIZAREMOS PARA LIBERAR O H2-CONSOLE LOCALHOST:8080
+	
+	@Autowired
+	private JwtTokenStore tokenStore;
+	
+	// ENDPOINTS PUBLICOS DA APLICAÇÃO -> O CATÁLOGO, QUE É PÚBLICO, SÓ FAZ REQUISIÇÕES 'GET' PARA MOSTRAR OS PRODUTOS AO CLIENTE
+	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
+	
+	
+	@Override
+	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+		resources.tokenStore(tokenStore); // ELE DECODIFICA O TOKEN E ANALISA SE O TOKEN RECEBIDO ESTÁ BATENDO COM O SECRET, SE ESTÁ EXPIRADO, ETC. VER SE O TOKEN É VÁLIDO
+	}
 
-    @Autowired
-    private Environment env;
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+		
+		// LIBERAR O LOCALHOST:8080 H2
+		if (Arrays.asList(env.getActiveProfiles()).contains("test")) { //SE NOS PERFIS ATIVOS, CONTIVER O "TESTE"
+			// LIBERAR O LOCALHOST H2
+			http.headers().frameOptions().disable();
+			
+		}
+		
+		// CONFIGURAR AS ROTAS DE QUEM PODE ACESSAR O QUE
+		http.authorizeRequests()
+		.antMatchers(PUBLIC).permitAll() // TUDO LIBERADO, NÃO PRECISA LOGIN
+		.anyRequest().authenticated(); // QUALQUER OUTRA ROTA, TEM QUE ESTAR LOGADO, NÃO IMPORTANDO O PERFIL DO USUÁRIO
+		
+	}
 
-    @Autowired
-    private JwtTokenStore tokenStore;
-
-    private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
-    private static final String[] GET_VISITOR = { "/reviews/**" };
-    private static final String[] VISITOR_MEMBER = { "/movies/**", "/genres/**" };
-    private static final String[] MEMBER = { "/reviews/**" };
-
-
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.tokenStore(tokenStore);
-    }
-
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-
-        // H2
-        if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
-            http.headers().frameOptions().disable();
-        }
-
-        http.authorizeRequests()
-                .antMatchers(PUBLIC).permitAll()
-                .antMatchers(HttpMethod.GET, GET_VISITOR).hasRole("VISITOR")
-                .antMatchers(VISITOR_MEMBER).hasAnyRole("VISITOR", "MEMBER")
-                .antMatchers(MEMBER).hasRole("MEMBER")
-                .anyRequest().authenticated();
-
-        http.cors().configurationSource(corsConfigurationSource());
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-
-        String[] origins = corsOrigins.split(",");
-
-        CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));
-        corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
-        corsConfig.setAllowCredentials(true);
-        corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfig);
-        return source;
-    }
-
-    @Bean
-    FilterRegistrationBean<CorsFilter> corsFilter() {
-        FilterRegistrationBean<CorsFilter> bean
-                = new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
-        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        return bean;
-    }
+	
 }

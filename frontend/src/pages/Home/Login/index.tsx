@@ -4,6 +4,7 @@ import {ReactComponent as ImgHome} from 'assets/images/home-image.svg';
 import './styles.css';
 
 
+
 const Login = () => {
   return (
     <div className='home-container'>

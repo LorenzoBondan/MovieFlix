@@ -1,0 +1,44 @@
+.review-card {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    background-color: #6C6C6C;
+    padding: 0px 10px 0px 10px;
+}
+
+.review-details h4 {
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.review-details-box {
+    border: solid 1px #E1E1E1;
+    padding: 10px 28px 21px 12px;
+}
+
+.review-details-box h4 {
+    margin: 0px;
+    color: #9E9E9E;
+    font-weight: 400;
+}
+
+.reviewer-name {
+    display: flex;
+}
+
+.reviewer-name img {
+    margin-top: 19px;
+    margin-left: 7px;
+    margin-right: 15px;
+}
+
+@media (min-width:1200px) {
+
+    .review-card {
+        padding: 0px 20px 15px 20px;
+    }
+}

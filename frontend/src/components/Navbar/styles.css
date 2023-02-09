@@ -16,6 +16,28 @@
     margin-left: 10px;
 }
 
+.nav-login-logout{
+    border-radius: 10px;
+    border: 2px solid black;
+    margin-right: 35px;
+}
+
+.nav-login-logout button{
+    width: 100px;
+    height: 30px;
+}
+
+.nav-login-logout h6{
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: -0.015em;
+    text-align: center;
+    margin-bottom: 0;
+    top: 4px;
+    text-transform: uppercase;
+}
+
 @media(min-width:576px){
     .nav-logo-text h4 {
         margin-left: 23px;

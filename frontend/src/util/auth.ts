@@ -9,6 +9,9 @@ export type TokenData = {
   authorities: Role[];
 };
 
+
+// Pegar e decodificar o token
+// Função que retorna ou o TokenData ou undefined
 export const getTokenData = (): TokenData | undefined => {
   try {
     return jwtDecode(getAuthData().access_token) as TokenData;
@@ -18,7 +21,7 @@ export const getTokenData = (): TokenData | undefined => {
 };
 
 export const isAuthenticated = (): boolean => {
-  let tokenData = getTokenData();
+  const tokenData = getTokenData();
   return tokenData && tokenData.exp * 1000 > Date.now() ? true : false;
 };
 

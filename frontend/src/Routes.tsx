@@ -4,6 +4,7 @@ import Home from 'pages/Home';
 import Catalog from 'pages/Catalog';
 import MovieDetails from 'pages/MovieDetails';
 import history from 'util/history';
+import PrivateRoute from 'components/PrivateRoute';
 
 // era BrowserRouter antes de inserir o parâmetro history
 
@@ -16,13 +17,15 @@ const Routes = () => (
         <Home />
       </Route>
 
-      <Route path="/movies" exact>
-        <Catalog />
-      </Route>
+      <PrivateRoute path='/movies'>
+        <Route path="/movies" exact>
+          <Catalog />
+        </Route>
 
-      <Route path="/movies/:movieId">
-        <MovieDetails />
-      </Route>
+        <Route path="/movies/:movieId">
+          <MovieDetails />
+        </Route>
+      </PrivateRoute>
 
     </Switch>
   </Router>

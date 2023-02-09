@@ -23,13 +23,16 @@ type LocationState = {
 const Login = () => {
 
     const location = useLocation<LocationState>();
-    const {from} = location.state || { from: { pathname: '/movies '}};
+    const {from} = location.state || { from: { pathname: '/movies'}};
 
     const { setAuthContextData } = useContext(AuthContext); // veio da navbar, para substituir login por logout e vice-versa
 
     const [hasError, setHasError] = useState(false); // mensagem de erro ao preencher errado (bootstrap alerts)
 
-    const { register, handleSubmit, formState: {errors} } = useForm<FormData>(); //formstate errors -> validação dos campos
+    const { register, handleSubmit, formState: {errors} } = useForm<FormData>(); 
+    // register -> registra os inputs do formulário
+    // handleSubmit -> tratar quando o formulário for enviado
+    // formstate errors -> validação dos campos
 
     const history = useHistory(); // permite redirecionamentos e mudanças de rota
 
@@ -49,7 +52,7 @@ const Login = () => {
             setAuthContextData({ // da navbar, mudar login -> logout
               authenticated: true,
               tokenData: getTokenData()
-            })
+            });
 
             history.replace(from); // faz o login e joga pra tela de movies, que por sua vez, entra direto na rota de admin/products
         })

@@ -1,8 +1,26 @@
+import { Link } from 'react-router-dom';
+import "./styles.css";
 
 const Catalog = () => {
-    return(
-        <h1>página de catálogo</h1>
-    );
-}
+  return (
+    <>
+      <div className="movie-list-container">
+
+        <div className="list-container">
+          <h1>Tela de listagem de filmes</h1>
+
+          <Link to="/movies/1/reviews">
+            <h2>Acessar movies/1</h2>
+          </Link>
+
+          <Link to="/movies/2/reviews">
+            <h2>Acessar movies/2</h2>
+          </Link>
+
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default Catalog;

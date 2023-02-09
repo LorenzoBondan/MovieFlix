@@ -1,13 +1,12 @@
 import { Redirect, Route } from "react-router-dom";
-import { hasAnyRoles, isAuthenticated, Role } from "util/auth";
+import { isAuthenticated } from "util/auth";
 
 type Props = {
     children: React.ReactNode;
     path: string;
-    roles?: Role[];
   };
 
-const PrivateRoute = ({ children, path, roles = [] }: Props) => {
+const PrivateRoute = ({ children, path }: Props) => {
 
 
     return (
@@ -19,10 +18,7 @@ const PrivateRoute = ({ children, path, roles = [] }: Props) => {
               pathname: "/",
               state: { from : location}
             }} /> 
-          ) : 
-            !hasAnyRoles(roles) ? (
-            <Redirect to="/movies" /> // rota que todos tem acesso
-            ) : ( // renderiza o children passado caso esteja autenticado, se não estiver, joga p tela de login
+          ) : ( // renderiza o children passado caso esteja autenticado, se não estiver, joga p tela de login
             children
           )
         }

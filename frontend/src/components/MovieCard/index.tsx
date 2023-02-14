@@ -1,4 +1,5 @@
 import { Movie } from "types/movie";
+import './styles.css';
 
 type Props = {
     movie : Movie;
@@ -14,7 +15,7 @@ const MovieCard = ({movie} : Props) => {
             <div className="movie-card-bottom-container">
                 <h1>{movie.title}</h1>
                 <h2>{movie.year}</h2>
-                <p>{movie.synopsis}</p>
+                <p>{movie.subTitle}</p>
             </div>
         </div>
     );

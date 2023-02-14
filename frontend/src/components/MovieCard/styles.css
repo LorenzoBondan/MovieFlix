@@ -81,7 +81,7 @@
         height: 322px;
         width: 258px;
         padding-bottom: 34px;
-        margin-right: 30px;
+        margin-right: 0 !important;
     }
 
     .movie-card-top-container img {

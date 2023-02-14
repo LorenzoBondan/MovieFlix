@@ -47,10 +47,8 @@ const MovieFilter = ( {onSubmitFilter} : Props) => {
     }
 
     return(
-        <div className="base-card movie-filter-container">
-            <form onSubmit={handleSubmit(onSubmit)} className='movie-filter-form'>
-
-                <div className='movie-filter-bottom-container'>
+        <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
                     
                     <div className='movie-filter-genre-container' style={{fontSize:"20px"}}>
                         <Controller 
@@ -70,9 +68,8 @@ const MovieFilter = ( {onSubmitFilter} : Props) => {
                             />    
                             )}
                         />
-                    </div>
 
-                </div>
+                    </div>
             </form>
         </div>
     );

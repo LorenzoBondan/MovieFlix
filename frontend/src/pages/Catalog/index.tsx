@@ -61,7 +61,7 @@ const Catalog = () => {
     <>
       <div className="movie-list-container">
 
-        <div className='movie-list-filter-container'>
+        <div className='base-card movie-list-filter-container'>
           <MovieFilter onSubmitFilter={handleSubmitFilter}/>
         </div>
 

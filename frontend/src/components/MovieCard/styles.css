@@ -1,8 +1,12 @@
 .movie-card-container {
     margin-bottom: 20px;
+    height: 322px;
+    width: 280px;
+    padding-bottom: 55px;
 }
 
 .movie-card-top-container img {
+    height: 165px;
     width: 100%;
     margin-top: 25px;
 }
@@ -36,5 +40,51 @@
     font-size: 14px;
     letter-spacing: -0.015em;
     color: #FFFFFF;
-    margin: 0px 20px 55px 15px;
+    margin: 0px 20px 0px 15px;
+}
+
+@media(min-width:576px){
+    .movie-card-container {
+        height: 322px;
+        width: 258px;
+        padding-bottom: 34px;
+    }
+}
+
+@media(min-width:768px){
+    .movie-card-container {
+        height: 364px;
+        width: 324px;
+        padding-bottom: 58px;
+    }
+
+    .movie-card-top-container img {
+        height: 204px;
+        margin-top: 20px;
+    }
+}
+
+@media(min-width:992px){
+    .movie-card-container {
+        height: 457px;
+        width: 436px;
+        padding-bottom: 69px;
+    }
+
+    .movie-card-top-container img {
+        height: 274px;
+    }
+}
+
+@media(min-width:1200px){
+    .movie-card-container {
+        height: 322px;
+        width: 258px;
+        padding-bottom: 34px;
+        margin-right: 30px;
+    }
+
+    .movie-card-top-container img {
+        height: 165px;
+    }
 }

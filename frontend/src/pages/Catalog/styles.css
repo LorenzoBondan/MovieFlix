@@ -19,3 +19,21 @@
     margin-left: 40px;
     text-decoration: none;
 }
+
+@media(min-width:576px){
+    .movie-list-container{
+        margin: 20px;
+    }
+}
+
+@media(min-width:768px){
+    .movie-list-container{
+        margin: 40px;
+    }
+}
+
+@media(min-width:1400px){
+    .movie-list-container{
+        padding: 0 140px;
+    }
+}

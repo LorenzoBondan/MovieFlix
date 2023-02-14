@@ -31,7 +31,7 @@ const Catalog = () => {
         withCredentials:true,
         params: {
           page: controlComponentsData.activePage,
-          size: 8,
+          size: 50,
 
           //name: controlComponentsData.filterData.name,
           //courseId: controlComponentsData.filterData.course?.id
@@ -56,15 +56,18 @@ const Catalog = () => {
 
         <div className="list-container">
           <>
-          <h1>Tela de listagem de filmes</h1>
 
-          {page?.content.map(movie => (
-            <div className="col-sm-6 col-lg-4 col-xl-3 movie-column" key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>
-              <MovieCard movie={movie}/>
-            </Link>
+          <div className='row'>
+            {page?.content.map(movie => (
+              <div className="col-sm-6 col-xl-3 movie-column" key={movie.id}>
+                <Link to={`/movies/${movie.id}`}>
+                  <MovieCard movie={movie}/>
+                </Link>
+              </div>
+            ))}
           </div>
-          ))}
+
+          
         </>
         </div>
       </div>

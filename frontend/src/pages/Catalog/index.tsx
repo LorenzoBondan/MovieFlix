@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import MovieCard from 'components/MovieCard';
+import MovieFilter, { MovieFilterData } from 'components/MovieFilter';
 import Pagination from 'components/Pagination';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -10,7 +11,7 @@ import "./styles.css";
 
 type ControlComponentsData = {
   activePage: number;
-  //filterData: StudentFilterData;
+  filterData: MovieFilterData;
 }
 
 const Catalog = () => {
@@ -18,12 +19,18 @@ const Catalog = () => {
   const [page, setPage] = useState<SpringPage<Movie>>();
 
     //manter o estado de todos os componentes que fazem a listagem
-    const [controlComponentsData, setControlComponentsData] = useState<ControlComponentsData>({activePage:0,});
+    const [controlComponentsData, setControlComponentsData] = useState<ControlComponentsData>({activePage:0, filterData: { genre: null },});
 
     const handlePageChange = (pageNumber : number) => {
-      setControlComponentsData({activePage: pageNumber}); //, filterData: controlComponentsData.filterData});
+      setControlComponentsData({activePage: pageNumber, filterData: controlComponentsData.filterData});
       //mantém o que está no filtro e muda só a página
     }
+
+        // função do componente Filter
+        const handleSubmitFilter = (data : MovieFilterData) => {
+          setControlComponentsData({activePage: 0, filterData: data});
+          // efetua o filtro e volta pra primeira página
+        }
 
     const getMovies = useCallback(() => {
       const params : AxiosRequestConfig = {
@@ -34,8 +41,7 @@ const Catalog = () => {
           page: controlComponentsData.activePage,
           size: 4,
 
-          //name: controlComponentsData.filterData.name,
-          //courseId: controlComponentsData.filterData.course?.id
+          genreId: controlComponentsData.filterData.genre?.id
         },
       }
   
@@ -54,6 +60,10 @@ const Catalog = () => {
   return (
     <>
       <div className="movie-list-container">
+
+        <div className='movie-list-filter-container'>
+          <MovieFilter onSubmitFilter={handleSubmitFilter}/>
+        </div>
 
         <div className="list-container">
           <>

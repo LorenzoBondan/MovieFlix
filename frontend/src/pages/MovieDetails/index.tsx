@@ -1,11 +1,14 @@
-import { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import ReviewCard from "components/ReviewCard";
 import ReviewForm from "components/ReviewForm";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Movie } from "types/movie";
 import { Review } from "types/review";
 import { hasAnyRoles } from "util/auth";
-import { requestBackend } from "util/requests";
+import { BASE_URL, requestBackend } from "util/requests";
+
+import './styles.css';
 
 type UrlParams = {
     movieId: string;
@@ -17,7 +20,25 @@ const MovieDetails = () => {
     const [page, setPage] = useState<Review[]>([]); //recebe a lista de reviews obtida na requisição.
     const { movieId } = useParams<UrlParams>();
 
+    const [movie, setMovie] = useState<Movie>();
 
+
+        /* detalhes do filme */
+        useEffect(() => {
+          const params: AxiosRequestConfig = {
+            url: `/movies/${movieId}`,
+            withCredentials: true,
+          };
+    
+          requestBackend(params).then((response) => {
+              setMovie(response.data);
+              console.log(response.data);
+            });
+    
+      }, [movieId]);
+
+
+    /* reviews do filme */
     useEffect(() => {
         const params: AxiosRequestConfig = {
           url: `/movies/${movieId}/reviews`,
@@ -34,6 +55,7 @@ const MovieDetails = () => {
           });
 
     }, [movieId]);
+
       
     const handleInsertReview = (review: Review) => {
         const clone = [...page]; // copia o conteúdo que já tem
@@ -43,8 +65,20 @@ const MovieDetails = () => {
 
         
     return (
-        <div className="page-container">
-          <h1>Tela de listagem de filmes id: {movieId}</h1>
+        <div className="movie-details-page-container">
+          <div className="base-card movie-details-card-container">
+            <div className="movie-details-image-container">
+              <img src={movie?.imgUrl} alt={movie?.title} />
+            </div>
+
+            <div className="movie-details-cotent-container">
+                <h1>{movie?.title}</h1>
+                <h2>{movie?.year}</h2>
+                <p>{movie?.subTitle}</p>
+
+                <h4>{movie?.synopsis}</h4>
+            </div>
+          </div>
 
           {hasAnyRoles(["ROLE_MEMBER"]) && ( // form de inserir avaliação SOMENTE PARA MEMBROS
             <ReviewForm movieId={movieId} onInsertReview={handleInsertReview} />

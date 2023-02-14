@@ -9,7 +9,7 @@ type Props = {
 const ReviewCard = ({ review }: Props) => {
   return (
 
-      <div className="movie-list-container">
+      <div className="review-movie-list-container">
 
         <div className="review-card">
 

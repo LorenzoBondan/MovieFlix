@@ -1,0 +1,53 @@
+.movie-details-page-container{
+    margin: 10px;
+}
+
+.movie-details-card-container{
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    margin-top: 20px;
+}
+
+.movie-details-image-container img{
+    height: 165px;
+    width: 240px;
+}
+
+.movie-details-cotent-container h1 {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    margin: 10px 20px 0px 5px;
+}
+
+.movie-details-cotent-container h2 {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.015em;
+    color: #FFC700;
+    margin: 0px 20px 0px 5px;
+}
+
+.movie-details-cotent-container p {
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    margin: 0px 20px 0px 5px;
+}
+
+.movie-details-cotent-container h4 {
+    font-weight: 400;
+    font-size: 16px;
+    text-align: justify;
+    letter-spacing: -0.015em;
+
+    color: #9E9E9E;
+    margin: 15px 5px 20px 5px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    padding: 10px;
+}

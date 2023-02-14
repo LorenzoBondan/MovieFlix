@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import MovieCard from 'components/MovieCard';
+import Pagination from 'components/Pagination';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Movie } from 'types/movie';
@@ -20,7 +21,7 @@ const Catalog = () => {
     const [controlComponentsData, setControlComponentsData] = useState<ControlComponentsData>({activePage:0,});
 
     const handlePageChange = (pageNumber : number) => {
-      //setControlComponentsData({activePage: pageNumber, filterData: controlComponentsData.filterData});
+      setControlComponentsData({activePage: pageNumber}); //, filterData: controlComponentsData.filterData});
       //mantém o que está no filtro e muda só a página
     }
 
@@ -31,7 +32,7 @@ const Catalog = () => {
         withCredentials:true,
         params: {
           page: controlComponentsData.activePage,
-          size: 50,
+          size: 4,
 
           //name: controlComponentsData.filterData.name,
           //courseId: controlComponentsData.filterData.course?.id
@@ -70,6 +71,13 @@ const Catalog = () => {
           
         </>
         </div>
+
+        <Pagination 
+                pageCount={(page) ? page.totalPages : 0} 
+                range={2}
+                onChange={handlePageChange}
+                forcePage={page?.number}
+                />
       </div>
     </>
   );
